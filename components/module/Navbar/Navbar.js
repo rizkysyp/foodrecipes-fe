@@ -29,7 +29,7 @@ const Navbar = ({ isLogin }) => {
             <Link href="/recipes/addRecipes">Add Recipes</Link>
           </div>
           <div className="p-2">
-            <Link href="/">Profile</Link>
+            <Link href="/profile">Profile</Link>
           </div>
         </div>
         {!isLogin ? (

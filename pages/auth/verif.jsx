@@ -8,10 +8,8 @@ import Image from "next/image";
 const register = () => {
   const router = useRouter();
   const [user, setUser] = useState({
-    name: "",
+    otp: "",
     email: "",
-    password: "",
-    phonenumber: "",
   });
 
   const handleChange = (e) => {
@@ -25,17 +23,17 @@ const register = () => {
       e.preventDefault();
     }
     try {
-      const result = await axios.post(
-        "http://localhost:3006/users/register",
-        user
-      );
+      await axios.post("http://localhost:3006/users/verif", user);
 
-      Swal.fire("Success", "Register Success", "success");
+      Swal.fire("Success", "Verifiaction Success,Silahkan Login", "success");
       router.push("/auth/login");
     } catch (err) {
-      console.log(err.response.status);
-      Swal.fire("Warning", "Email Already Registered", "error");
-      router.push("/auth/login");
+      console.log(user.email);
+      if (err.response.data.message == "email not found") {
+        return Swal.fire("Warning", "Email Not Found", "error");
+      } else {
+        return Swal.fire("Warning", "wrong Verification Token", "error");
+      }
     }
   };
   return (
@@ -81,52 +79,28 @@ const register = () => {
             <hr />
             <form onSubmit={handleSubmit}>
               <label for="basic-url" className="form-label">
-                Name
-              </label>
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  onChange={handleChange}
-                  name="name"
-                  aria-describedby="basic-addon3"
-                  className="form-control"
-                />
-              </div>
-              <label for="basic-url" className="form-label">
                 Email
               </label>
               <div className="input-group mb-3">
                 <input
                   type="text"
-                  placeholder="Enter your email"
+                  placeholder="Masukan Email"
                   onChange={handleChange}
                   name="email"
-                  className="form-control"
-                />
-              </div>
-              <label for="basic-url" className="form-label">
-                Phone Number
-              </label>
-              <div className="input-group mb-3">
-                <input
-                  type="number"
-                  placeholder="Enter your phone Number"
-                  onChange={handleChange}
-                  name="phonenumber"
+                  aria-describedby="basic-addon3"
                   className="form-control"
                 />
               </div>
 
               <label for="basic-url" className="form-label">
-                Label
+                Kode Verifikasi
               </label>
               <div className="input-group mb-3">
                 <input
-                  type="password"
-                  placeholder="Enter your Password"
+                  type="number"
+                  placeholder="Masukan Kode Aktivasi"
                   onChange={handleChange}
-                  name="password"
+                  name="otp"
                   className="form-control"
                 />
               </div>

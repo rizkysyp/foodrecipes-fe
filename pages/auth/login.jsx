@@ -56,7 +56,12 @@ const login = () => {
         router.push("/");
       }
     } catch (err) {
-      console.log(err);
+      if (err.response.data.message == "email not verified") {
+        Swal.fire("Warning", "Email Not verified", "error");
+        router.push("/auth/verif");
+      } else if (err.response.data.message == " email not found") {
+        return Swal.fire("Warning", "Email Not Found", "error");
+      }
     }
   };
   const handleChange = (e) => {
@@ -122,8 +127,13 @@ const login = () => {
             />
             <br />
             <button
-              className="btn btn-warning text-white"
-              style={{ position: "absolute", width: "415px", height: "50px" }}
+              className="btn text-white"
+              style={{
+                position: "absolute",
+                width: "415px",
+                height: "50px",
+                backgroundColor: "#EFC81A",
+              }}
               title={loading ? "Logging in.." : "Login"}
               onClick={handleSubmit}
             >
@@ -131,22 +141,37 @@ const login = () => {
             </button>
 
             <Link href="/forgot-password">
-              <h6 style={{ marginTop: "80px" }} className="text-end">
+              <h6
+                style={{ marginTop: "80px", color: "#999999" }}
+                className="text-end"
+              >
                 Forgot Password ?
               </h6>
             </Link>
 
-            <Link href="/register">
-              <h6 style={{ marginTop: "20px" }} className="text-center">
-                Don’t have an account?{" "}
+            <h6
+              style={{
+                marginTop: "20px",
+                textDecoration: "none",
+                color: "#999999",
+              }}
+              className="text-center"
+            >
+              Don’t have an account?{" "}
+              <Link href="/auth/register" style={{ textDecoration: "none" }}>
                 <p
                   className="text-warning "
-                  style={{ marginLeft: "250px", marginTop: "-19px" }}
+                  style={{
+                    marginLeft: "250px",
+                    marginTop: "-19px",
+                    textDecoration: "none",
+                    color: "#999999",
+                  }}
                 >
                   Sign Up
                 </p>
-              </h6>
-            </Link>
+              </Link>
+            </h6>
           </div>
         </div>
       </div>

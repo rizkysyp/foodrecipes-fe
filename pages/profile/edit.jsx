@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
-import { Navbar } from "react-bootstrap";
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
@@ -19,13 +18,13 @@ export const getServerSideProps = async (context) => {
   console.log(token, "token ssr");
   return {
     props: {
-      isLogin: token ? true : false,
+      isLogin: true,
       token: token,
     },
   };
 };
 
-const addRecipes = ({ isLogin, token }) => {
+const editPhoto = ({ token }) => {
   // const router = useRouter();
   const [upload, setUpload] = useState(false);
   const [name, setName] = useState("");
@@ -51,10 +50,8 @@ const addRecipes = ({ isLogin, token }) => {
     try {
       setUpload(true);
       const data = new FormData();
-      data.append("name", name);
-      data.append("description", description);
+      
       data.append("photo", photo.file);
-      data.append("video", video.file);
       // const config = {
       //   headers: {
       //     "content-type": "multipart/form-data",
@@ -63,11 +60,12 @@ const addRecipes = ({ isLogin, token }) => {
       // };
       const user = {
         headers: {
+          "content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       };
       console.log(user, "token");
-      await axios.post("http://localhost:3006/recipes", data, user);
+      await axios.put("http://localhost:3006/recipes", data, user);
       Swal.fire("Success", "Add Recipes Success", "success");
     } catch (err) {
       Swal.fire("Failed", "Add Recipes Fails", "error");
@@ -77,57 +75,24 @@ const addRecipes = ({ isLogin, token }) => {
 
   return (
     <>
-      <header>
-        <Navbar isLogin={isLogin} />
-      </header>
       <div className="container">
-        <div>
-          <p>Photo</p>
-          <input
-            type="file"
-            name="photo"
-            accept="image/*"
-            placeholder="Photo"
-            onChange={handleImage}
-            className="form-control bg-light"
-            style={{ height: "400px" }}
-          />
-        </div>
-
-        <div className="row">
-          <div className="col-lg-12">
-            <p>Tittle</p>
+        <div className="row justify-items-center">
+          <div>
+            <p>Photo</p>
             <input
+              type="file"
+              name="photo"
+              accept="image/*"
+              placeholder="Photo"
+              onChange={handleImage}
               className="form-control bg-light"
-              type="text"
-              placeholder="Tittle"
-              onChange={(e) => setName(e.target.value)}
+              style={{ height: "400px" }}
             />
           </div>
         </div>
-
-        <p>Ingredients</p>
-        <textarea
-          id="exampleFormControlTextarea1"
-          className="form-control bg-light"
-          placeholder="ingredients"
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <p>Video</p>
-        <input
-          type="file"
-          name="video"
-          accept="video/*"
-          placeholder="video"
-          onChange={handleVideo}
-          className="form-control bg-light"
-        />
-        <button className="btn btn-primary" onClick={handleRecipes}>
-          Input
-        </button>
       </div>
     </>
   );
 };
 
-export default addRecipes;
+export default editPhoto;
