@@ -1,9 +1,12 @@
 import axios from "axios";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Tabs, Tab } from "react-bootstrap";
 import Navbar from "../../components/module/Navbar/Navbar";
+import Swal from "sweetalert2";
+
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
 
@@ -25,6 +28,7 @@ export const getServerSideProps = async (context) => {
 };
 
 const profile = ({ isLogin, token }) => {
+  const router = useRouter();
   const [key, setKey] = useState("myrecipe");
   const [recipes, setRecipes] = useState([]);
   const [profile, setProfile] = useState([]);
@@ -61,6 +65,17 @@ const profile = ({ isLogin, token }) => {
     };
     getRecipes(), getProfile();
   }, []);
+
+  const handleDelete = async (id_recipes) => {
+    const router = useRouter();
+    try {
+      await axios.delete(`http://localhost:3006/recipes/delete/${id_recipes}`);
+      Swal.fire("Success", "Delete Berhasil", "success");
+    } catch (err) {
+      console.log(err);
+      Swal.fire("ERROR", "Delete Gagal", "error");
+    }
+  };
   return (
     <>
       <header>
@@ -130,6 +145,7 @@ const profile = ({ isLogin, token }) => {
                           >
                             <Image src={item.photo} height={300} width={300} />
                           </div>
+
                           <h4
                             style={{
                               marginTop: "-40px",
@@ -139,6 +155,27 @@ const profile = ({ isLogin, token }) => {
                           >
                             {item.recipes_name}
                           </h4>
+                          <div className="d-flex">
+                            <div onClick={() => handleDelete(item.id_recipes)}>
+                              <img
+                                className="mt-3"
+                                src="/Icon/trash.png"
+                                style={{ height: "30px", width: "30px" }}
+                              ></img>
+                            </div>
+                            {/* EDIT */}
+                            <div
+                              onClick={() =>
+                                router.push(`/recipes/edit/${item.id_recipes}`)
+                              }
+                            >
+                              <img
+                                className="mt-3"
+                                src="/Icon/trash.png"
+                                style={{ height: "30px", width: "30px" }}
+                              ></img>
+                            </div>
+                          </div>
                         </div>
                       ))
                     ) : (
@@ -150,37 +187,6 @@ const profile = ({ isLogin, token }) => {
                 </Tab>
                 <Tab eventKey="savedrecipe" title="Saved Recipe">
                   <div className="row">
-                    <div className="col-3">
-                      <div>
-                        <Image
-                          src="/food9.png"
-                          height={300}
-                          width={300}
-                          className="rounded"
-                        />
-                      </div>
-                      <h4
-                        style={{
-                          marginTop: "-40px",
-                          marginLeft: "13px",
-                          color: "white",
-                        }}
-                      >
-                        Indian Salad
-                      </h4>
-                    </div>
-                    <div className="col-3">
-                      <Image src="/food9.png" height={300} width={300} />
-                      <h4
-                        style={{
-                          marginTop: "-40px",
-                          marginLeft: "13px",
-                          color: "white",
-                        }}
-                      >
-                        Indian Salad
-                      </h4>
-                    </div>
                     <div className="col-3">
                       <Image src="/food9.png" height={300} width={300} />
                       <h4
@@ -197,30 +203,6 @@ const profile = ({ isLogin, token }) => {
                 </Tab>
                 <Tab eventKey="likedrecipe" title="Liked Recipe">
                   <div className="row">
-                    <div className="col-3">
-                      <Image src="/food9.png" height={300} width={300} />
-                      <h4
-                        style={{
-                          marginTop: "-40px",
-                          marginLeft: "13px",
-                          color: "white",
-                        }}
-                      >
-                        Indian Salad
-                      </h4>
-                    </div>
-                    <div className="col-3">
-                      <Image src="/food9.png" height={300} width={300} />
-                      <h4
-                        style={{
-                          marginTop: "-40px",
-                          marginLeft: "13px",
-                          color: "white",
-                        }}
-                      >
-                        Indian Salad
-                      </h4>
-                    </div>
                     <div className="col-3">
                       <Image src="/food9.png" height={300} width={300} />
                       <h4

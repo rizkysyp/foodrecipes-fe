@@ -12,11 +12,9 @@ const login = () => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     try {
-      setLoading(true);
       const config = {
         withCredentials: true,
       };
@@ -134,7 +132,6 @@ const login = () => {
                 height: "50px",
                 backgroundColor: "#EFC81A",
               }}
-              title={loading ? "Logging in.." : "Login"}
               onClick={handleSubmit}
             >
               Login
