@@ -171,8 +171,12 @@ const profile = ({ isLogin, token }) => {
                             >
                               <img
                                 className="mt-3"
-                                src="/Icon/trash.png"
-                                style={{ height: "30px", width: "30px" }}
+                                src="/Icon/edit.svg"
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  marginLeft: "20px",
+                                }}
                               ></img>
                             </div>
                           </div>

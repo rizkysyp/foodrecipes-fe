@@ -74,7 +74,7 @@ const register = () => {
           <div className="col-lg-4 offset-2">
             <h3 className="text-warning text-center">Let’s Get Started !</h3>
             <h6 className="text-center">
-              Create new account to access all features
+              Verif Your Email, To Access Your Account
             </h6>
             <hr />
             <form onSubmit={handleSubmit}>
