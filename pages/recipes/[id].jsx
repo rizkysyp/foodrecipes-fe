@@ -4,6 +4,7 @@ import Link from "next/link";
 
 export async function getServerSideProps(context) {
   try {
+    const { token } = context.req.cookies;
     const id = context.params.id;
     console.log(id);
     const result = await axios.get(
@@ -14,6 +15,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         data,
+        token,
       },
     };
   } catch (e) {
@@ -21,11 +23,42 @@ export async function getServerSideProps(context) {
   }
 }
 
-const detailRecipes = ({ data }) => {
+const detailRecipes = ({ data, token }) => {
+  const handleSave = async (id_recipes) => {
+    try {
+      const header = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const bodyParameters = { id_resep: `${id_recipes}` };
+
+      console.log(id_recipes, "id resep");
+      await axios.post(
+        `http://localhost:3006/recipes/save/`,
+        bodyParameters,
+        header
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   console.log(data);
+
   return (
     <div className="container">
       <div className="row">
+        <div onClick={() => handleSave(data.id_recipes)}>
+          <img
+            className="mt-3"
+            src="/Icon/trash.png"
+            style={{
+              height: "30px",
+              width: "30px",
+              cursor: "pointer",
+            }}
+          ></img>
+        </div>
         <div>
           <h1>{data.recipes_name}</h1>
         </div>

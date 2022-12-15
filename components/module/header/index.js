@@ -28,7 +28,12 @@ const Header = ({ isLogin }) => {
           </div>
         ) : (
           <div>
-            <button onClick={handleLogout}>Logout</button>
+            <button
+              onClick={handleLogout}
+              style={{ marginLeft: "20px", cursor: "pointer" }}
+            >
+              Logout
+            </button>
           </div>
         )}
       </div>

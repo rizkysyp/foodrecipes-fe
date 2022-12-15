@@ -43,7 +43,12 @@ const Navbar = ({ isLogin }) => {
             className="d-flex flex-row-reverse mt-2"
             style={{ marginRight: "60px" }}
           >
-            <p onClick={handleLogout}>Logout</p>
+            <p
+              onClick={handleLogout}
+              style={{ marginLeft: "20px", cursor: "pointer" }}
+            >
+              Logout
+            </p>
           </div>
         )}
       </div>

@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Tabs, Tab } from "react-bootstrap";
 import Navbar from "../../components/module/Navbar/Navbar";
 import Swal from "sweetalert2";
+import Router from "next/router";
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
@@ -67,7 +68,7 @@ const profile = ({ isLogin, token }) => {
   }, []);
 
   const handleDelete = async (id_recipes) => {
-    const router = useRouter();
+    // const router = useRouter();
     try {
       await axios.delete(`http://localhost:3006/recipes/delete/${id_recipes}`);
       Swal.fire("Success", "Delete Berhasil", "success");
@@ -120,7 +121,7 @@ const profile = ({ isLogin, token }) => {
             ))
           ) : (
             <div>
-              <h1>Loading</h1>
+              <h3>Loading</h3>
             </div>
           )}
         </div>
@@ -143,7 +144,14 @@ const profile = ({ isLogin, token }) => {
                           <div
                             style={{ borderRadius: "10%", overflow: "hidden" }}
                           >
-                            <Image src={item.photo} height={300} width={300} />
+                            <Image
+                              src={item.photo}
+                              height={300}
+                              width={300}
+                              onClick={() =>
+                                router.push(`/recipes/${item.id_recipes}`)
+                              }
+                            />
                           </div>
 
                           <h4
@@ -160,7 +168,11 @@ const profile = ({ isLogin, token }) => {
                               <img
                                 className="mt-3"
                                 src="/Icon/trash.png"
-                                style={{ height: "30px", width: "30px" }}
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  cursor: "pointer",
+                                }}
                               ></img>
                             </div>
                             {/* EDIT */}
@@ -176,6 +188,7 @@ const profile = ({ isLogin, token }) => {
                                   height: "30px",
                                   width: "30px",
                                   marginLeft: "20px",
+                                  cursor: "pointer",
                                 }}
                               ></img>
                             </div>
