@@ -14,7 +14,7 @@ export default function Home({ isLogin, href }) {
       try {
         const limit = 6;
         let result = await axios.get(
-          `http://localhost:3006/recipes/search?limit=${limit}`
+          process.env.HOST + `recipes/search?limit=${limit}`
         );
         setData(result.data.data);
       } catch (error) {

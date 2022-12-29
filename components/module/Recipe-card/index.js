@@ -17,7 +17,7 @@ export const Recipe = ({ recipe, loading, token }) => {
       console.log(user, "token");
       console.log(id_recipes, "id resep");
       await axios.post(
-        `http://localhost:3006/recipes/save/`,
+        process.env.HOST + `recipes/save/`,
         bodyParameters,
         header
       );

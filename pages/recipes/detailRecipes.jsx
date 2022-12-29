@@ -11,7 +11,7 @@ export default function Profile() {
   console.log(id);
   const getData = () => {
     axios
-      .get(`http://localhost:3006/recipes/detail/8`)
+      .get(process.env.HOST + `recipes/detail/8`)
       .then((res) => {
         setData(res.data.data);
 

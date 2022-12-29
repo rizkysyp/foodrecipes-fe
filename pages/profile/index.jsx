@@ -32,6 +32,8 @@ const profile = ({ isLogin, token }) => {
   const router = useRouter();
   const [key, setKey] = useState("myrecipe");
   const [recipes, setRecipes] = useState([]);
+  const [saved, setSaved] = useState([]);
+  const [liked, setLiked] = useState([]);
   const [profile, setProfile] = useState([]);
   const user = {
     headers: { Authorization: `Bearer ${token}` },
@@ -40,7 +42,7 @@ const profile = ({ isLogin, token }) => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-        let result = await axios.get(`http://localhost:3006/users/`, {
+        let result = await axios.get(process.env.HOST + `users/`, {
           ...user,
         });
         setProfile(result.data.data);
@@ -53,7 +55,7 @@ const profile = ({ isLogin, token }) => {
     const getRecipes = async () => {
       try {
         let result = await axios.get(
-          `http://localhost:3006/recipes/user-recipes/`,
+          process.env.HOST + `recipes/user-recipes/`,
           {
             ...user,
           }
@@ -64,13 +66,38 @@ const profile = ({ isLogin, token }) => {
         console.log(error);
       }
     };
-    getRecipes(), getProfile();
+
+    const getSaved = async () => {
+      try {
+        let result = await axios.get(process.env.HOST + `recipes/save/`, {
+          ...user,
+        });
+        setSaved(result.data.data);
+        console.log(recipes);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const getLiked = async () => {
+      try {
+        let result = await axios.get(process.env.HOST + `recipes/liked/`, {
+          ...user,
+        });
+        setLiked(result.data.data);
+        console.log(recipes);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getRecipes(), getProfile(), getSaved(), getLiked();
   }, []);
 
   const handleDelete = async (id_recipes) => {
     // const router = useRouter();
     try {
-      await axios.delete(`http://localhost:3006/recipes/delete/${id_recipes}`);
+      await axios.delete(process.env.HOST + `recipes/delete/${id_recipes}`);
       Swal.fire("Success", "Delete Berhasil", "success");
     } catch (err) {
       console.log(err);
@@ -204,34 +231,134 @@ const profile = ({ isLogin, token }) => {
                 </Tab>
                 <Tab eventKey="savedrecipe" title="Saved Recipe">
                   <div className="row">
-                    <div className="col-3">
-                      <Image src="/food9.png" height={300} width={300} />
-                      <h4
-                        style={{
-                          marginTop: "-40px",
-                          marginLeft: "13px",
-                          color: "white",
-                        }}
-                      >
-                        Indian Salad
-                      </h4>
-                    </div>
+                    {saved ? (
+                      saved.map((item) => (
+                        <div className="col-3">
+                          <div
+                            style={{ borderRadius: "10%", overflow: "hidden" }}
+                          >
+                            <Image
+                              src={item.photo}
+                              height={300}
+                              width={300}
+                              onClick={() =>
+                                router.push(`/recipes/${item.id_recipes}`)
+                              }
+                            />
+                          </div>
+
+                          <h4
+                            style={{
+                              marginTop: "-40px",
+                              marginLeft: "13px",
+                              color: "white",
+                            }}
+                          >
+                            {item.recipes_name}
+                          </h4>
+                          <div className="d-flex">
+                            <div onClick={() => handleDelete(item.id_recipes)}>
+                              <img
+                                className="mt-3"
+                                src="/Icon/trash.png"
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  cursor: "pointer",
+                                }}
+                              ></img>
+                            </div>
+                            {/* EDIT */}
+                            <div
+                              onClick={() =>
+                                router.push(`/recipes/edit/${item.id_recipes}`)
+                              }
+                            >
+                              <img
+                                className="mt-3"
+                                src="/Icon/edit.svg"
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  marginLeft: "20px",
+                                  cursor: "pointer",
+                                }}
+                              ></img>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div>
+                        <h1>Loading</h1>
+                      </div>
+                    )}
                   </div>
                 </Tab>
                 <Tab eventKey="likedrecipe" title="Liked Recipe">
                   <div className="row">
-                    <div className="col-3">
-                      <Image src="/food9.png" height={300} width={300} />
-                      <h4
-                        style={{
-                          marginTop: "-40px",
-                          marginLeft: "13px",
-                          color: "white",
-                        }}
-                      >
-                        Indian Salad
-                      </h4>
-                    </div>
+                    {liked ? (
+                      liked.map((item) => (
+                        <div className="col-3">
+                          <div
+                            style={{ borderRadius: "10%", overflow: "hidden" }}
+                          >
+                            <Image
+                              src={item.photo}
+                              height={300}
+                              width={300}
+                              onClick={() =>
+                                router.push(`/recipes/${item.id_recipes}`)
+                              }
+                            />
+                          </div>
+
+                          <h4
+                            style={{
+                              marginTop: "-40px",
+                              marginLeft: "13px",
+                              color: "white",
+                            }}
+                          >
+                            {item.recipes_name}
+                          </h4>
+                          <div className="d-flex">
+                            <div onClick={() => handleDelete(item.id_recipes)}>
+                              <img
+                                className="mt-3"
+                                src="/Icon/trash.png"
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  cursor: "pointer",
+                                }}
+                              ></img>
+                            </div>
+                            {/* EDIT */}
+                            <div
+                              onClick={() =>
+                                router.push(`/recipes/edit/${item.id_recipes}`)
+                              }
+                            >
+                              <img
+                                className="mt-3"
+                                src="/Icon/edit.svg"
+                                style={{
+                                  height: "30px",
+                                  width: "30px",
+                                  marginLeft: "20px",
+                                  cursor: "pointer",
+                                }}
+                              ></img>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div>
+                        <h1>Loading</h1>
+                      </div>
+                    )}
                   </div>
                 </Tab>
               </Tabs>

@@ -19,11 +19,12 @@ const login = () => {
         withCredentials: true,
       };
       const result = await axios.post(
-        "http://localhost:3006/users/login",
+        process.env.HOST + "users/login",
         user,
         config
       );
       console.log(user);
+      console.log(process.env.HOST);
       if (result.data.message === "email not found") {
         Swal.fire(
           "Warning",

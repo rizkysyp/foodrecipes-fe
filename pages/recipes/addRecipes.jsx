@@ -67,7 +67,7 @@ const addRecipes = ({ isLogin, token }) => {
         },
       };
       console.log(user, "token");
-      await axios.post("http://localhost:3006/recipes", data, user);
+      await axios.post(process.env.HOST + "recipes", data, user);
       Swal.fire("Success", "Add Recipes Success", "success");
     } catch (err) {
       Swal.fire("Failed", "Add Recipes Fails", "error");

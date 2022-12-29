@@ -7,9 +7,7 @@ export async function getServerSideProps(context) {
     const { token } = context.req.cookies;
     const id = context.params.id;
     console.log(id);
-    const result = await axios.get(
-      `http://localhost:3006/recipes/detail/${id}`
-    );
+    const result = await axios.get(process.env.HOST + `recipes/detail/${id}`);
     const data = result.data.data[0];
     console.log(data);
     return {
@@ -35,7 +33,7 @@ const detailRecipes = ({ data, token }) => {
 
       console.log(id_recipes, "id resep");
       await axios.post(
-        `http://localhost:3006/recipes/save/`,
+        PROCESS.ENV.HOST + `recipes/save/`,
         bodyParameters,
         header
       );

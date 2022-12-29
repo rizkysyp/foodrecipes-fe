@@ -26,7 +26,7 @@ const register = () => {
     }
     try {
       const result = await axios.post(
-        "http://localhost:3006/users/register",
+        process.env.HOST + "users/register",
         user
       );
 

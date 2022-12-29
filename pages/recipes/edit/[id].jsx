@@ -38,7 +38,7 @@ const editRecipes = ({ token }) => {
           Authorization: `Bearer ${token}`,
         },
       };
-      await axios.put(`http://localhost:3006/recipes/update/${id}`, data);
+      await axios.put(process.env.HOST + `recipes/update/${id}`, data);
       Swal.fire("Success", "Edit Recipes Sukses", "success");
     } catch (error) {
       console.log(error);

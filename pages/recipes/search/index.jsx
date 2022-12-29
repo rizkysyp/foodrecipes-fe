@@ -37,7 +37,7 @@ export default function Search({ isLogin, token }) {
     const fetchRecipe = async () => {
       setLoading(true);
       const result = await axios.get(
-        `http://localhost:3006/recipes/search?search=${search}`
+        process.env.HOST + `recipes/search?search=${search}`
       );
       setRecipes(result.data.data);
       setLoading(false);

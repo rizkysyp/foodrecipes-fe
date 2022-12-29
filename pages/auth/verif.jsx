@@ -23,7 +23,7 @@ const register = () => {
       e.preventDefault();
     }
     try {
-      await axios.post("http://localhost:3006/users/verif", user);
+      await axios.post(process.env.HOST + "users/verif", user);
 
       Swal.fire("Success", "Verifiaction Success,Silahkan Login", "success");
       router.push("/auth/login");
