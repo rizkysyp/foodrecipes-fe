@@ -8,6 +8,7 @@ import Navbar from "../../components/module/Navbar/Navbar";
 import Swal from "sweetalert2";
 import Router from "next/router";
 import Footer from "../../components/module/FoooterProfile";
+import ModalPhoto from "../../components/Modal/ModalPhoto";
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
@@ -167,7 +168,8 @@ const profile = ({ isLogin, token }) => {
                     style={{ marginLeft: "670px", marginTop: "30px" }}
                   >
                     <h4>{item.name}</h4>
-                    <h5 style={{ marginLeft: "-13px" }}>Edit Photo</h5>
+
+                    <ModalPhoto />
                   </div>
                 </div>
               </div>

@@ -39,18 +39,10 @@ const editPhoto = ({ token }) => {
     });
   };
 
-  const handleVideo = (e) => {
-    setVideo({
-      file: e.target.files[0],
-      preview: URL.createObjectURL(e.target.files[0]),
-    });
-  };
-
   const handleRecipes = async () => {
     try {
       setUpload(true);
       const data = new FormData();
-      
       data.append("photo", photo.file);
       // const config = {
       //   headers: {
