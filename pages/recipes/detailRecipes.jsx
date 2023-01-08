@@ -32,7 +32,12 @@ export default function Profile() {
           <div key={i} className="container mt-5">
             <div className="container row">
               <div>
-                <Image src={item.photo} width="500" height="400" />
+                <Image
+                  src={item.photo}
+                  className="rounded"
+                  width="500"
+                  height="400"
+                />
               </div>
               <div>
                 <p>Ingredients</p>

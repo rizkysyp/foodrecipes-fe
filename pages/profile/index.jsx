@@ -7,6 +7,7 @@ import { Tabs, Tab } from "react-bootstrap";
 import Navbar from "../../components/module/Navbar/Navbar";
 import Swal from "sweetalert2";
 import Router from "next/router";
+import Footer from "../../components/module/FoooterProfile";
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
@@ -99,11 +100,37 @@ const profile = ({ isLogin, token }) => {
     try {
       await axios.delete(process.env.HOST + `recipes/delete/${id_recipes}`);
       Swal.fire("Success", "Delete Berhasil", "success");
+      router.push(`/profile`);
     } catch (err) {
       console.log(err);
       Swal.fire("ERROR", "Delete Gagal", "error");
     }
   };
+
+  const handleDeleteLiked = async (id_recipes) => {
+    // const router = useRouter();
+    try {
+      await axios.delete(process.env.HOST + `recipes/liked/${id_recipes}`);
+      Swal.fire("Success", "Delete Berhasil", "success");
+      router.push(`/profile`);
+    } catch (err) {
+      console.log(err);
+      Swal.fire("ERROR", "Delete Gagal", "error");
+    }
+  };
+
+  const handleDeleteBookmark = async (id_recipes) => {
+    // const router = useRouter();
+    try {
+      await axios.delete(process.env.HOST + `recipes/save/${id_recipes}`);
+      Swal.fire("Success", "Delete Berhasil", "success");
+      router.push(`/profile`);
+    } catch (err) {
+      console.log(err);
+      Swal.fire("ERROR", "Delete Gagal", "error");
+    }
+  };
+
   return (
     <>
       <header>
@@ -133,15 +160,14 @@ const profile = ({ isLogin, token }) => {
                     </div>
                   </div>
                 </div>
-                <div className="row justify-content-center mt-5 ml-5">
-                  <div className="col-1">Edit Photo</div>
-                </div>
-                <div className="row">
+
+                <div className="row justify-content-center">
                   <div
                     className="col-6"
-                    style={{ marginLeft: "600px", marginTop: "-50px" }}
+                    style={{ marginLeft: "670px", marginTop: "30px" }}
                   >
                     <h4>{item.name}</h4>
+                    <h5 style={{ marginLeft: "-13px" }}>Edit Photo</h5>
                   </div>
                 </div>
               </div>
@@ -257,30 +283,13 @@ const profile = ({ isLogin, token }) => {
                             {item.recipes_name}
                           </h4>
                           <div className="d-flex">
-                            <div onClick={() => handleDelete(item.id_recipes)}>
+                            <div onClick={() => handleDeleteBookmark(item.id)}>
                               <img
                                 className="mt-3"
                                 src="/Icon/trash.png"
                                 style={{
                                   height: "30px",
                                   width: "30px",
-                                  cursor: "pointer",
-                                }}
-                              ></img>
-                            </div>
-                            {/* EDIT */}
-                            <div
-                              onClick={() =>
-                                router.push(`/recipes/edit/${item.id_recipes}`)
-                              }
-                            >
-                              <img
-                                className="mt-3"
-                                src="/Icon/edit.svg"
-                                style={{
-                                  height: "30px",
-                                  width: "30px",
-                                  marginLeft: "20px",
                                   cursor: "pointer",
                                 }}
                               ></img>
@@ -323,30 +332,13 @@ const profile = ({ isLogin, token }) => {
                             {item.recipes_name}
                           </h4>
                           <div className="d-flex">
-                            <div onClick={() => handleDelete(item.id_recipes)}>
+                            <div onClick={() => handleDeleteLiked(item.id)}>
                               <img
                                 className="mt-3"
                                 src="/Icon/trash.png"
                                 style={{
                                   height: "30px",
                                   width: "30px",
-                                  cursor: "pointer",
-                                }}
-                              ></img>
-                            </div>
-                            {/* EDIT */}
-                            <div
-                              onClick={() =>
-                                router.push(`/recipes/edit/${item.id_recipes}`)
-                              }
-                            >
-                              <img
-                                className="mt-3"
-                                src="/Icon/edit.svg"
-                                style={{
-                                  height: "30px",
-                                  width: "30px",
-                                  marginLeft: "20px",
                                   cursor: "pointer",
                                 }}
                               ></img>
@@ -366,6 +358,7 @@ const profile = ({ isLogin, token }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

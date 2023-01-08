@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../../../components/module/Navbar/Navbar";
 import { Recipe } from "../../../components/module/Recipe-card";
 import { Pagination } from "../../../components/module/Pagination/Pagination";
+import Footer from "../../../components/module/Footer";
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
@@ -75,6 +76,9 @@ export default function Search({ isLogin, token }) {
           />
         </div>
       </div>
+      <footer>
+        <Footer></Footer>
+      </footer>
     </>
   );
 }

@@ -2,15 +2,36 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import Navbar from "../../../components/module/Navbar/Navbar";
+import Footer from "../../../components/module/Footer";
 
-const editRecipes = ({ token }) => {
+export const getServerSideProps = async (context) => {
+  const { token } = context.req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {
+      isLogin: true,
+      token: token,
+    },
+  };
+};
+
+const editRecipes = ({ islogin, token }) => {
   const router = useRouter();
   const { id } = router.query;
   const [photo, setPhoto] = useState({});
   const [video, setVideo] = useState({});
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
   const handlePhoto = (e) => {
     setPhoto({
       file: e.target.files[0],
@@ -47,8 +68,11 @@ const editRecipes = ({ token }) => {
   };
 
   return (
-    <>
-      <header>{/* <Navbar isLogin={isLogin} /> */}</header>
+    <div>
+      {" "}
+      <header>
+        <Navbar isLogin={islogin} />
+      </header>
       <div className="container">
         <div>
           <p>Photo</p>
@@ -91,31 +115,15 @@ const editRecipes = ({ token }) => {
           onChange={handleVideo}
           className="form-control bg-light"
         />
-        <button className="btn btn-primary" onClick={handleEdit}>
+        <button className="btn btn-primary mt-4" onClick={handleEdit}>
           Input
         </button>
       </div>
-    </>
+      <footer>
+        <Footer />
+      </footer>
+    </div>
   );
 };
 
-export const getServerSideProps = async (context) => {
-  const { token } = context.req.cookies;
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: true,
-      },
-    };
-  }
-
-  return {
-    props: {
-      isLogin: true,
-      token: token,
-    },
-  };
-};
 export default editRecipes;

@@ -31,6 +31,9 @@ const Navbar = ({ isLogin }) => {
           <div className="p-2">
             <Link href="/profile">Profile</Link>
           </div>
+          <div className="p-2">
+            <Link href="/recipes/search">Search</Link>
+          </div>
         </div>
         {!isLogin ? (
           <div className="d-flex flex-row-reverse">

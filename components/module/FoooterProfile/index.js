@@ -6,20 +6,8 @@ class Footer extends Component {
     return (
       <div
         className="container-fluid"
-        style={{ backgroundColor: "#EFC81A", marginTop: "120px" }}
+        style={{ backgroundColor: "#EFC81A", marginTop: "221px" }}
       >
-        <div className="row">
-          <div className="col-sm-12 mt-5">
-            <h1 className="text-center">Eat, Cook, Repeat</h1>
-          </div>
-        </div>
-        <div className="row mb-5">
-          <div className="col-sm-12">
-            <h6 className="text-center" style={{ color: "#707070" }}>
-              Share your best recipe by uploading here !
-            </h6>
-          </div>
-        </div>
         <div className="row">
           <div className="col-lg-1 offset-lg-4 mt-5 col-sm-1">
             <h6 style={{ color: "#707070" }} className="text-product">

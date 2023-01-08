@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-
+import Footer from "../components/module/Footer";
 import Navbar from "../components/module/Navbar/Navbar";
 import Button from "../components/module/Button/button";
 import { useEffect, useState } from "react";
@@ -112,7 +112,12 @@ export default function Home({ isLogin, href }) {
                     onClick={() => Router.push(`/recipes/${item.id_recipes}`)}
                   />
                   <h6
-                    style={{ marginTop: "-40px", marginLeft: "20px" }}
+                    style={{
+                      marginTop: "-40px",
+                      marginLeft: "20px",
+                      fontSize: "20px",
+                      color: "white",
+                    }}
                     className=""
                   >
                     {item.recipes_name}
@@ -193,6 +198,9 @@ export default function Home({ isLogin, href }) {
           </a>
         </footer>
       </div> */}
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }

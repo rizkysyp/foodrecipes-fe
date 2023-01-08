@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
-
+import Footer from "../../components/module/Footer";
 import { useState } from "react";
-import { Navbar } from "react-bootstrap";
+import Navbar from "../../components/module/Navbar/Navbar";
 
 export const getServerSideProps = async (context) => {
   const { token } = context.req.cookies;
@@ -122,10 +122,13 @@ const addRecipes = ({ isLogin, token }) => {
           onChange={handleVideo}
           className="form-control bg-light"
         />
-        <button className="btn btn-primary" onClick={handleRecipes}>
+        <button className="btn btn-primary mt-4 col" onClick={handleRecipes}>
           Input
         </button>
       </div>
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };
