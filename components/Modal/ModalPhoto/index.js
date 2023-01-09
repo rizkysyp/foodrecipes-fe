@@ -5,24 +5,6 @@ import { ModalBody } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-export const getServerSideProps = async (context) => {
-  const { token } = context.req.cookies;
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: true,
-      },
-    };
-  }
-  console.log(token, "token ssr");
-  return {
-    props: {
-      isLogin: token ? true : false,
-      token: token,
-    },
-  };
-};
 const ModalPhoto = ({ token }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -87,7 +69,7 @@ const ModalPhoto = ({ token }) => {
           </button>
           <button
             className="btn "
-            style={{ backgroundColor: "#5E50A1", color: "white" }}
+            style={{ backgroundColor: "#EFC81A", color: "white" }}
             onClick={(e) => handleData(e)}
           >
             Save Changes

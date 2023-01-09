@@ -40,7 +40,7 @@ const profile = ({ isLogin, token }) => {
   const user = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  console.log(token, "token");
+  console.log(token, "token easy");
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -138,48 +138,59 @@ const profile = ({ isLogin, token }) => {
         <Navbar isLogin={isLogin} />
       </header>
       <div className="container">
-        <div>
-          {profile ? (
-            profile.map((item) => (
-              <div>
-                <div className="row justify-content-center">
-                  <div className="col-1">
-                    <div
-                      style={{
-                        borderRadius: "50%",
-                        overflow: "hidden",
-                        width: "200px",
-                        height: "200px",
-                      }}
-                    >
-                      <Image
-                        src={item.photo}
-                        width={200}
-                        height={200}
-                        className="rounded-full"
-                      ></Image>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row justify-content-center">
-                  <div
-                    className="col-6"
-                    style={{ marginLeft: "670px", marginTop: "30px" }}
-                  >
-                    <h4>{item.name}</h4>
-
-                    <ModalPhoto />
-                  </div>
-                </div>
+        {profile ? (
+          profile.map((item) => (
+            <div className="row d-flex justify-content-center">
+              <Image
+                src={item.photo}
+                width={200}
+                height={200}
+                className="rounded-full"
+                style={{
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  width: "200px",
+                  height: "200px",
+                }}
+              ></Image>
+              <h3 className="d-flex justify-content-center mt-3">
+                {item.name}
+              </h3>
+              <div className="d-flex justify-content-center mt-2">
+                <ModalPhoto token={token} />
               </div>
-            ))
-          ) : (
-            <div>
-              <h3>Loading</h3>
             </div>
-          )}
-        </div>
+            // <div>
+            //   <div className="row d-flex justify-content-center">
+            //     <div
+            //       style={{
+            //         borderRadius: "50%",
+            //         overflow: "hidden",
+            //         width: "200px",
+            //         height: "200px",
+            //       }}
+            //     >
+            //       <Image
+            //         src={item.photo}
+            //         width={200}
+            //         height={200}
+            //         className="rounded-full"
+            //       ></Image>
+            //     </div>
+            //   </div>
+
+            //   <div className="row d-flex justify-content-center">
+            //     <h4>{item.name}</h4>
+
+            //     <ModalPhoto />
+            //   </div>
+            // </div>
+          ))
+        ) : (
+          <div>
+            <h3>Loading</h3>
+          </div>
+        )}
 
         {/* navbar */}
         <div className="row">
@@ -360,6 +371,7 @@ const profile = ({ isLogin, token }) => {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );

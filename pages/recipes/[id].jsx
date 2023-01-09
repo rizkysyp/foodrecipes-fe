@@ -168,45 +168,41 @@ const detailRecipes = ({ isLogin, data, token }) => {
         <Navbar isLogin={isLogin} />
       </header>
       <div className="container">
-        <div
-          className="row justify-content-center mt-4"
-          style={{ marginLeft: "50px" }}
-        >
-          <div className="col-4">
-            <h1>{data.recipes_name}</h1>
-          </div>
+        <div className="" style={{ marginLeft: "50px" }}>
+          <h1 className="row d-flex justify-content-center mt-4">
+            {data.recipes_name}
+          </h1>
         </div>
         <div
-          className="row justify-content-center mt-5"
+          className="row d-flex justify-content-center mt-5"
           style={{ marginLeft: "50px" }}
         >
-          <div className="col-9">
+          <div className="row d-flex justify-content-center">
             <img src={data.photo} style={{ width: "900px", height: "500px" }} />
-            <div className="row flex-row">
-              <div onClick={() => handleSave(data.id_recipes)}>
-                <img
-                  className="mt-3"
-                  src="/Icon/bookmark.png"
-                  style={{
-                    height: "50px",
-                    width: "50px",
-                    cursor: "pointer",
-                    marginTop: "-50px",
-                  }}
-                ></img>
-              </div>
-              <div onClick={() => handleLike(data.id_recipes)}>
-                <img
-                  className="mt-3"
-                  src="/Icon/Liked.png"
-                  style={{
-                    height: "50px",
-                    width: "50px",
-                    cursor: "pointer",
-                    marginTop: "-50px",
-                  }}
-                ></img>
-              </div>
+            <div className="d-flex justify-content-center">
+              <img
+                onClick={() => handleSave(data.id_recipes)}
+                className="mt-3"
+                src="/Icon/bookmark.png"
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  cursor: "pointer",
+                  marginTop: "-50px",
+                }}
+              ></img>
+              <img
+                onClick={() => handleLike(data.id_recipes)}
+                className="mt-3"
+                src="/Icon/Like1.png"
+                style={{
+                  height: "50px",
+                  width: "50px",
+                  cursor: "pointer",
+
+                  marginLeft: "10px",
+                }}
+              ></img>
             </div>
           </div>
         </div>

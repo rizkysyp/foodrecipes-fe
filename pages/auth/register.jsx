@@ -31,7 +31,7 @@ const register = () => {
       );
 
       Swal.fire("Success", "Register Success", "success");
-      router.push("/auth/login");
+      router.push("/auth/verif");
     } catch (err) {
       console.log(err.response.status);
       Swal.fire("Warning", "Email Already Registered", "error");
@@ -119,7 +119,7 @@ const register = () => {
               </div>
 
               <label for="basic-url" className="form-label">
-                Label
+                Password
               </label>
               <div className="input-group mb-3">
                 <input
