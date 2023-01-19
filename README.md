@@ -85,19 +85,21 @@ Contributions are what make the open source community such an amazing place to b
 ## Screenshot
 | Add Recipe Page | Detail Page |
 | ------------- | ------------- |
-| ![add recipe](/screenshot/Add Recipe.png?raw=true "Add Recipe Page") | ![detail recipe](/screenshot/Detail Recipe.png?raw=true "Detail Recipe Page")|
+| ![add recipe](/screenshot/Add.png?raw=true "Add Recipe Page") | ![detail recipe](/screenshot/Detail.png?raw=true "Detail Recipe Page")|
 
 | Register Page  | Login Page |
 | ------------- | ------------- |
 | ![landing](/screenshot/Register.png?raw=true "Landing Page") | ![login](/screenshot/Login.png?raw=true "Login Page") |
 
-| Profile Page | All Recipe Page |
-| ------------- | ------------- |
-| ![profile](/screenshot/Profile.png?raw=true "Profile Page") |  |
-
 | Landing Page | Verification Page |
 | ------------- | ------------- |
 | ![Landing](/screenshot/landing.png?raw=true "Landing Page") | ![verification](/screenshot/Verif.png?raw=true "Verification Page") |
+
+| Profile Page | 
+| ------------- | 
+| ![profile](/screenshot/Profile.png?raw=true "Profile Page") |
+
+
 
 
 <!-- RELATED PROJECT -->
