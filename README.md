@@ -3,7 +3,7 @@
 
   <h3 align="center">Mama Recipe</h3>
   <p align="center">
-    <image align="center" width="200" src='./screenshot/logo.jpg' />
+    <image align="center" width="200" src='./screenshot/logo.png' />
   </p>
 
   <p align="center">
