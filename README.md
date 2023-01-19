@@ -112,4 +112,4 @@ Contributions are what make the open source community such an amazing place to b
 Contributors names and contact info
 
 * AUTHOR
-  * Muhamad Islahuddin [@rizkysyp](https://github.com/rizkysyp)
+  * Moch Rizky Syahputra [@rizkysyp](https://github.com/rizkysyp)
