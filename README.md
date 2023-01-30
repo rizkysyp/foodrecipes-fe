@@ -36,7 +36,7 @@
 
 
 Mama Recipe is web base application used to share and view some recipe from everyone, user can add, edit and delete recipe as they want and the other can see all recipes from other user. This application built with Node JS, Next JS as frontend framework.
-This Application use Rest API server from [mamarecipeapi](https://food-recipe-be.herokuapp.com)
+This Application use Rest API server from [mamarecipeapi](https://api-blanja.rizkyproject.my.id)
 
 ### Built With
 
@@ -95,11 +95,13 @@ Contributions are what make the open source community such an amazing place to b
 | ------------- | ------------- |
 | ![Landing](/screenshot/landing.png?raw=true "Landing Page") | ![verification](/screenshot/Verif.png?raw=true "Verification Page") |
 
-| Profile Page | 
-| ------------- | 
-| ![profile](/screenshot/Profile.png?raw=true "Profile Page") |
+| Profile Page | Edit Recipe |
+| ------------- | ------------- |
+| ![profile](/screenshot/profile.png?raw=true "Profile Page") |![edit](/screenshot/editrecipe.png?raw=true "Profile Page") |
 
-
+| Search Page |
+| ------------- |
+| ![search](/screenshot/search.png?raw=true "Profile Page") |
 
 
 <!-- RELATED PROJECT -->
